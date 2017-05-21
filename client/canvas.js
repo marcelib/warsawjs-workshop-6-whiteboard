@@ -28,7 +28,6 @@ Template.canvas.onRendered(function() {
   });
 
   canvas.on('object:modified', function(event) {
-    console.log("event target log:", event.target)
     var doc = event.target.toObject()
     Objects.update(event.target._id, {
       $set: doc

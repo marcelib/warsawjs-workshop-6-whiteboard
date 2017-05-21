@@ -5,7 +5,6 @@ Template.home.helpers({
 });
 Template.whiteboardItem.helpers({
   id: function() {
-    console.log("CHU")
     return this._id;
   }
 });
