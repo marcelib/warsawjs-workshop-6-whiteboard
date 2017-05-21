@@ -1,15 +1,14 @@
 <template name="home">
-<head>
-    <title>whiteboard</title>
-</head>
+    <head>
+        <title>whiteboard</title>
+    </head>
     <div class="container">
-      <div class="list-group">
-          <a href="/whiteboard/" class="list-group-item active text-center">+</a>
-      {{#each whiteboards}}
-          <a href="/whiteboard/{{_id}}" class="list-group-item">
-                 Whiteboard <small>{{>whiteboardItem}}</small>
-         </a>
-         {{/each}}
-      </div>
+        <div class="list-group">
+            <a href="/whiteboard/" class="list-group-item active text-center">+</a> {{#each whiteboards}}
+            <a href="/whiteboard/{{_id}}" class="list-group-item">
+                 Whiteboard <small>
+                     <span class="text">{{_id}}</span></small>
+         </a> {{/each}}
+        </div>
     </div>
 </template>

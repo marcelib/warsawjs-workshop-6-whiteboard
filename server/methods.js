@@ -9,8 +9,8 @@ Meteor.methods({
       sessionId: passedId
     }).fetch();
     console.log("found" + foundObjects)
-    foundObjects.forEachObject(function(obj) {
-      Objects.delete(obj);
+    _.forEach(foundObjects, function(obj) {
+      Objects.remove(obj._id);
     })
   }
 })
