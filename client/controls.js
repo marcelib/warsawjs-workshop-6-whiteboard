@@ -18,7 +18,6 @@ Template.controls.events({
 })
 
 function switchCanvasDrawingMode(event) {
-  console.log(event.target.value)
   Session.set("editingMode", event.target.value)
 }
 
