@@ -18,10 +18,12 @@ Template.controls.events({
 })
 
 function switchCanvasDrawingMode(event) {
-  Session.set("drawingMode", event.target.value)
+  console.log(event.target.value)
+  Session.set("editingMode", event.target.value)
 }
 
 function clearCanvas() {
+  Meteor.call("clearCanvas", Session.get("sessionId"))
   Session.set("clearTrigger", true)
 }
 

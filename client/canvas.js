@@ -16,26 +16,48 @@ Template.canvas.onRendered(function() {
   });
 
   canvas.on('object:added', function(event) {
-
     var object = event.target
     if (object._id) {
       return
     }
     var doc = object.toObject()
     doc._id = Random.id()
+    doc.sessionId = Session.get("sessionId")
     Objects.insert(doc)
-  })
+  });
+
+  canvas.on('object:modified', function(event) {
+    console.log("event target log:", event.target)
+    var doc = event.target.toObject()
+    Objects.update(event.target._id, {
+      $set: doc
+    })
+  });
 
   Objects.find().observeChanges({
     added: function(id, object) {
-
+      if (object.sessionId != Session.get("sessionId")) {
+        return
+      }
       fabric.util.enlivenObjects([object], function([object]) {
         object._id = id;
         canvas.add(object);
       });
+    },
+    changed: function(id, changed) {
+      var object = canvas.getObjectById(id);
+      object.set(changed);
+      canvas.renderAll();
+    },
+    removed: function(id) {
+      canvas.forEachObject(function(object) {
+        if (object._id === id) {
+          canvas.remove(object)
+          return
+        }
+      })
     }
   })
-
 
   Session.set("drawingMode", "selectionMode");
   Session.set("clearTrigger", false);
@@ -43,17 +65,25 @@ Template.canvas.onRendered(function() {
   Session.set("brushColor", canvas.freeDrawingBrush.color);
 
   Tracker.autorun(function() {
-    var drawingMode = Session.get("drawingMode");
-    console.log(drawingMode)
-    if (drawingMode === "drawingMode") {
+    var canvas = fabric.Canvas.activeInstance;
+    canvas.__eventListeners["mouse:down"] = [];
+
+    var drawingMode = Session.get("editingMode");
+    if (drawingMode == "drawingMode") {
       canvas.isDrawingMode = true
     }
-    if (drawingMode === "selectionMode") {
+    if (drawingMode == "selectionMode") {
       canvas.isDrawingMode = false
     }
-    canvas.forEachObject(function(obj) {
-      obj.selectable = false;
-    })
+    if (drawingMode == "removalMode") {
+      canvas.isDrawingMode = false
+      canvas.on('mouse:down', function(event) {
+        var object = event.target;
+        Objects.remove(object._id)
+        canvas.remove(object)
+        return false;
+      });
+    }
   });
 
   Tracker.autorun(function() {
