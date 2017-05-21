@@ -1,10 +1,5 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import {
+  Mongo
+} from "meteor/mongo"
 
-import './home.html';
-import './whiteboard.html';
-import './whiteboardlistitem.html';
-import './controls.html';
-import './navigation.html';
-import './canvas.html';
-import './404.html';
+Meteor.subscribe("Objects")

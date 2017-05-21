@@ -3,20 +3,21 @@
         <div class="panel panel-default">
             <div class="panel-heading">Menu</div>
             <div class="panel-body">
-                <div class="checkbox">
-                    <label for="drawingMode">
-         <input type="checkbox" id="drawingMode"> Tryb rysowania
-     </label>
-                </div>
+              <div class="modeSelector">
+
+  <input type="radio" name="mode" value="drawingMode"> Tryb rysowania<br>
+  <input type="radio" name="mode" value="selectionMode"> Tryb edycji
+              </div>
+
                 <div class="form-group">
 
                     <label for="brushSize">
-         Rozmiar pędzla: <input type="range" name="points" min="1" max="100" id="brushSize"                                        > ILE px
+         Rozmiar pędzla: <input type="range" name="points" min="1" max="100" value="10" id="brushSize"> {{brushSize}}px
      </label>
                 </div>
                 <div class="form-group">
                     <label for="brushColor">
-         Kolor: <input type="color" id="brushColor">
+         Kolor: <input type="color" id="brushColor"> ({{brushColor}})
      </label>
                 </div>
                 <div class="form-group">
