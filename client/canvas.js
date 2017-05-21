@@ -24,6 +24,7 @@ Template.canvas.onRendered(function() {
     doc._id = Random.id()
     doc.sessionId = Session.get("sessionId")
     Objects.insert(doc)
+    canvas.remove(object)
   });
 
   canvas.on('object:modified', function(event) {
