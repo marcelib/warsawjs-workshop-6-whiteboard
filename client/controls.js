@@ -14,6 +14,13 @@ Template.controls.events({
   },
   "change #brushColor": function(event) {
     changeBrushColor(event)
+  },
+  "keypress #whiteboardName": function(event) {
+    console.log("EEE")
+    if (event.key === 'Enter') {
+      console.log('do validate');
+      changeWhiteboardName(event)
+    }
   }
 })
 
@@ -34,6 +41,12 @@ function changeBrushSize(event) {
 function changeBrushColor(event) {
   var brushColor = event.target.value;
   Session.set("brushColor", brushColor);
+}
+
+function changeWhiteboardName(event) {
+  Whiteboards.update(Session.get("sessionId"), {
+    name: event.target.value
+  })
 }
 
 Template.controls.helpers({

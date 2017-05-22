@@ -4,11 +4,23 @@
     </head>
     <div class="container">
         <div class="list-group">
-            <a href="/whiteboard/" class="list-group-item active text-center">+</a> {{#each whiteboards}}
-            <a href="/whiteboard/{{_id}}" class="list-group-item">
-                 Whiteboard <small>
+            <a href="/whiteboard/" class="list-group-item active text-center">Click here to add a whiteboard</a>
+            {{#each whiteboards}}
+            <div class="list-group-item">
+            <a href="/whiteboard/{{_id}}" >
+                 {{#if hasName}}
+                    {{name}}
+                 {{else}}
+                    Whiteboard
+                {{/if}}
+                <small>
                      <span class="text">{{_id}}</span></small>
-         </a> {{/each}}
+         </a>
+      <a href="/whiteboard/delete/{{_id}}">
+         <div class='glyphicon glyphicon-remove-circle remove-button'></div>
+       </a>
+         </div>
+          {{/each}}
         </div>
     </div>
 </template>

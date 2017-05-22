@@ -3,3 +3,10 @@
 .whiteboard {
   border: 3px solid #e7e7e7;
 }
+
+.remove-button {
+  font-size: 1.5em;
+  float: right;
+  cursor: pointer;
+  cursor: hand
+}
