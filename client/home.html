@@ -2,25 +2,25 @@
     <head>
         <title>whiteboard</title>
     </head>
-    <div class="container">
+    <div class="container-fluid">
         <div class="list-group">
             <a href="/whiteboard/" class="list-group-item active text-center">Click here to add a whiteboard</a>
             {{#each whiteboards}}
-            <div class="list-group-item">
-            <a href="/whiteboard/{{_id}}" >
-                 {{#if hasName}}
-                    {{name}}
-                 {{else}}
-                    Whiteboard
-                {{/if}}
-                <small>
-                     <span class="text">{{_id}}</span></small>
-         </a>
-      <a href="/whiteboard/delete/{{_id}}">
-         <div class='glyphicon glyphicon-remove-circle remove-button'></div>
-       </a>
-         </div>
-          {{/each}}
+                <div class="list-group-item">
+                    <a href="/whiteboard/{{_id}}">
+                        {{#if hasName}}
+                            {{name}}
+                        {{else}}
+                            Whiteboard
+                        {{/if}}
+                        <small>
+                            <span class="text">{{_id}}</span></small>
+                    </a>
+                    <a href="/whiteboard/delete/{{_id}}">
+                        <div class='glyphicon glyphicon-remove-circle remove-button'></div>
+                    </a>
+                </div>
+            {{/each}}
         </div>
     </div>
 </template>
